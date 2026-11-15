@@ -11,13 +11,13 @@ application_source = "main"
 [server]
 port = 8080
 host = "127.0.0.1"
-workers = 10                                 # Number of worker threads to handle requests (defaults to physical CPU count)
+workers = 10
 # This is the grace time (in seconds) given to the actix-server to stop the execution
 # For more details: https://actix.rs/docs/server/#graceful-shutdown
 shutdown_timeout = 30
 # HTTP Request body limit. Defaults to 32kB
 request_body_limit = 32_768
-keep_alive = 5                                # Keep-alive timeout in seconds
+keep_alive = 5
 client_request_timeout = 5000                 # Client request timeout in milliseconds
 client_disconnect_timeout = 1000              # Client disconnect timeout in milliseconds
 
@@ -105,7 +105,7 @@ max_lifetime = 1800       # Maximum lifetime in seconds before a connection is r
 [redis]
 host = "127.0.0.1"
 port = 6379
-pool_size = 5                     # Number of connections to keep open
+pool_size = 5
 reconnect_max_attempts = 5        # Maximum number of reconnection attempts to make before failing. Set to 0 to retry forever.
 reconnect_delay = 5               # Delay between reconnection attempts, in milliseconds
 default_ttl = 300                 # Default TTL for entries, in seconds
@@ -124,7 +124,7 @@ max_feed_count = 200              # The maximum number of frames that will be fe
 
 # This section provides configs for currency conversion api
 [forex_api]
-api_key = ""                      # Api key for making request to foreign exchange Api
+api_key = ""
 fallback_api_key = ""             # Api key for the fallback service
 redis_ttl_in_seconds = 172800     # Time to expire for forex data stored in Redis
 data_expiration_delay_in_seconds = 21600   # Expiration time for data in cache as well as redis in seconds
@@ -143,11 +143,11 @@ file_name = "debug.log" # base name for log files.
 level = "WARN"
 # sets the log level for one or more crates
 filtering_directive = "WARN,router=INFO,reqwest=INFO"
-#                      ^^^^        ^^^^---------^^^^-- sets the log level for the
-#                      |                               router and reqwest crates to INFO.
-#                      |
-#                      |______________________________ sets the log level for all
-#                                                      other crates to WARN.
+#
+#
+#
+#
+#
 
 # Logging configuration for console logging
 [log.console]
@@ -158,21 +158,21 @@ log_format = "default" # Log format. "default" or "json"
 level = "DEBUG"
 # sets the log level for one or more crates
 filtering_directive = "WARN,router=INFO,reqwest=INFO"
-#                      ^^^^        ^^^^---------^^^^-- sets the log level for the
-#                      |                               router and reqwest crates to INFO.
-#                      |
-#                      |______________________________ sets the log level for all
-#                                                      other crates to WARN.
+#
+#
+#
+#
+#
 
 # Telemetry configuration for metrics and traces
 [log.telemetry]
-traces_enabled = false                                # boolean [true or false], whether traces are enabled
-metrics_enabled = false                               # boolean [true or false], whether metrics are enabled
-ignore_errors = false                                 # boolean [true or false], whether to ignore errors during traces or metrics pipeline setup
-sampling_rate = 0.1                                   # decimal rate between 0.0 - 1.0
+traces_enabled = false
+metrics_enabled = false
+ignore_errors = false
+sampling_rate = 0.1
 otel_exporter_otlp_endpoint = "http://localhost:4317" # endpoint to send metrics and traces to, can include port number
-otel_exporter_otlp_timeout = 5000                     # timeout (in milliseconds) for sending metrics and traces
-use_xray_generator = false                            # Set this to true for AWS X-ray compatible traces
+otel_exporter_otlp_timeout = 5000
+use_xray_generator = false
 route_to_trace = ["*/confirm"]
 bg_metrics_collection_interval_in_secs = 15           # Interval for collecting the metrics in background thread
 
@@ -222,13 +222,13 @@ shutdown_flush_ms = 5000
 [secrets]
 master_enc_key = "sample_key"            # Master Encryption key used to encrypt merchant wise encryption key. Should be 32-byte long.
 admin_api_key = "test_admin"             # admin API key for admin authentication.
-jwt_secret = "secret"                    # JWT secret used for user authentication.
+jwt_secret = "secret"
 
 # Locker settings contain details for accessing a card locker, a
 # PCI Compliant storage entity which stores payment method information
 # like card details
 [locker]
-host = ""                           # Locker host
+host = ""
 mock_locker = true                  # Emulate a locker locally using Postgres
 locker_signing_key_id = "1"         # Key_id to sign basilisk hs locker
 locker_enabled = true               # Boolean to enable or disable saving cards in locker
@@ -534,7 +534,7 @@ disabled = false                   # This flag decides if the consumer should ac
 upper_fetch_limit = 0             # Upper limit for fetching entries from the redis queue (in seconds)
 lower_fetch_limit = 1800          # Lower limit for fetching entries from redis queue (in seconds)
 lock_key = "PRODUCER_LOCKING_KEY" # The following keys defines the producer lock that is created in redis with
-lock_ttl = 160                    # the ttl being the expiry (in seconds)
+lock_ttl = 160
 
 # Scheduler server configuration
 [scheduler.server]
@@ -556,12 +556,12 @@ loop_interval = 500            # Specifies how much time to wait after checking 
 [pm_filters.stripe]
 #           ^--- This can be any connector (can be multiple)
 paypal = { currency = "USD,INR", country = "US" }
-# ^                       ^------- comma-separated values
+# ^
 # ^------------------------------- any valid payment method type (can be multiple) (for cards this should be card_network)
 # If either currency or country isn't provided then, all possible values are accepted
 
 [cors]
-max_age = 30                            # Maximum time (in seconds) for which this CORS request may be cached.
+max_age = 30
 origins = "http://localhost:8080"       # List of origins that are allowed to make requests.
 allowed_methods = "GET,POST,PUT,DELETE" # List of methods that are allowed
 wildcard_origin = false                 # If true, allows any origin to make requests
@@ -569,9 +569,9 @@ wildcard_origin = false                 # If true, allows any origin to make req
 # EmailClient configuration. Only applicable when the `email` feature flag is enabled.
 [email]
 sender_email = "example@example.com"                 # Sender email
-aws_region = ""                                      # AWS region used by AWS SES
-allowed_unverified_days = 1                          # Number of days the api calls ( with jwt token ) can be made without verifying the email
-active_email_client = "SES"                          # The currently active email client
+aws_region = ""
+allowed_unverified_days = 1
+active_email_client = "SES"
 recon_recipient_email = "recon@example.com"          # Recipient email for recon request email
 prod_intent_recipient_email = "business@example.com" # Recipient email for prod intent email
 
@@ -584,7 +584,7 @@ sts_role_session_name = "" # An identifier for the assumed role session, used to
 password_validity_in_days = 90       # Number of days after which password should be updated
 two_factor_auth_expiry_in_secs = 300 # Number of seconds after which 2FA should be done again if doing update/change from inside
 totp_issuer_name = "Hyperswitch"     # Name of the issuer for TOTP
-base_url = ""                        # Base url used for user specific redirects and emails
+base_url = ""
 force_two_factor_auth = false        # Whether to force two factor authentication for all users
 force_cookies = false                # Whether to use only cookies for JWT extraction and authentication
 
@@ -614,12 +614,12 @@ billwerk = { long_lived_token = false, payment_method = "card" }
 globalpay = { long_lived_token = false, payment_method = "card", flow = "mandates" }
 dwolla = { long_lived_token = true, payment_method = "bank_debit" }
 
-[debit_routing_config]                                       # Debit Routing configs
-supported_currencies = "USD"                                 # Supported currencies for debit routing
-supported_connectors = "adyen"                               # Supported connectors for debit routing
+[debit_routing_config]
+supported_currencies = "USD"
+supported_connectors = "adyen"
 
 [debit_routing_config.connector_supported_debit_networks]    # Debit Routing config that contains the supported debit networks for each connector
-adyen = "Star,Pulse,Accel,Nyce"                              # Debit networks supported by adyen connector
+adyen = "Star,Pulse,Accel,Nyce"
 
 [temp_locker_enable_config]
 stripe = { payment_method = "bank_transfer" }
@@ -638,20 +638,20 @@ redsys = { payment_method = "card" }
 worldpayxml = { payment_method = "card" }
 
 [dummy_connector]
-enabled = true                                  # Whether dummy connector is enabled or not
-payment_ttl = 172800                            # Time to live for dummy connector payment in redis
-payment_duration = 1000                         # Fake delay duration for dummy connector payment
-payment_tolerance = 100                         # Fake delay tolerance for dummy connector payment
+enabled = true
+payment_ttl = 172800
+payment_duration = 1000
+payment_tolerance = 100
 payment_retrieve_duration = 500                 # Fake delay duration for dummy connector payment sync
 payment_retrieve_tolerance = 100                # Fake delay tolerance for dummy connector payment sync
 payment_complete_duration = 500                 # Fake delay duration for dummy connector payment complete
 payment_complete_tolerance = 100                # Fake delay tolerance for dummy connector payment complete
-refund_ttl = 172800                             # Time to live for dummy connector refund in redis
-refund_duration = 1000                          # Fake delay duration for dummy connector refund
-refund_tolerance = 100                          # Fake delay tolerance for dummy connector refund
+refund_ttl = 172800
+refund_duration = 1000
+refund_tolerance = 100
 refund_retrieve_duration = 500                  # Fake delay duration for dummy connector refund sync
 refund_retrieve_tolerance = 100                 # Fake delay tolerance for dummy connector refund sync
-authorize_ttl = 36000                           # Time to live for dummy connector authorize request in redis
+authorize_ttl = 36000
 assets_base_url = "https://www.example.com/"    # Base url for dummy connector assets
 default_return_url = "https://www.example.com/" # Default return url when no return url is passed while payment
 slack_invite_url = "https://www.example.com/"   # Slack invite url for hyperswitch
@@ -660,12 +660,12 @@ discord_invite_url = "https://www.example.com/" # Discord invite url for hypersw
 [zero_mandates.supported_payment_methods]
 card.credit.connector_list = "checkout,stripe,adyen,authorizedotnet,cybersource,datatrans,globalpay,worldpay,multisafepay,nmi,nexinets,noon,bankofamerica,braintree,nuvei,payme,wellsfargo,bamboraapac,elavon,fiuu,nexixpay,novalnet,paybox,paypal,archipel,mollie,imerchantsolutions,peachpayments"
 card.debit.connector_list = "checkout,stripe,adyen,authorizedotnet,cybersource,datatrans,globalpay,worldpay,multisafepay,nmi,nexinets,noon,bankofamerica,braintree,nuvei,payme,wellsfargo,bamboraapac,elavon,fiuu,nexixpay,novalnet,paybox,paypal,archipel,mollie,imerchantsolutions,peachpayments"
-wallet.paypal = { connector_list = "adyen" }                                          # Mandate supported payment method type and connector for wallets
-pay_later.klarna = { connector_list = "adyen" }                                       # Mandate supported payment method type and connector for pay_later
-bank_debit.ach = { connector_list = "gocardless,adyen" }                              # Mandate supported payment method type and connector for bank_debit
-bank_debit.becs = { connector_list = "gocardless" }                                   # Mandate supported payment method type and connector for bank_debit
-bank_debit.bacs = { connector_list = "adyen" }                                        # Mandate supported payment method type and connector for bank_debit
-bank_debit.sepa = { connector_list = "gocardless,adyen" }                             # Mandate supported payment method type and connector for bank_debit
+wallet.paypal = { connector_list = "adyen" }
+pay_later.klarna = { connector_list = "adyen" }
+bank_debit.ach = { connector_list = "gocardless,adyen" }
+bank_debit.becs = { connector_list = "gocardless" }
+bank_debit.bacs = { connector_list = "adyen" }
+bank_debit.sepa = { connector_list = "gocardless,adyen" }
 bank_redirect.ideal = { connector_list = "stripe,adyen,globalpay" }                   # Mandate supported payment method type and connector for bank_redirect
 bank_redirect.sofort = { connector_list = "stripe,globalpay" }
 wallet.apple_pay = { connector_list = "stripe,adyen,cybersource,noon,bankofamerica,authorizedotnet,worldpayxml,payme,imerchantsolutions" }
@@ -679,12 +679,12 @@ network_token.network_token.connector_list = "peachpayments"
 [mandates.supported_payment_methods]
 card.credit.connector_list = "aci,checkout,stripe,adyen,authorizedotnet,cybersource,datatrans,globalpay,worldpay,multisafepay,nmi,nexinets,noon,bankofamerica,braintree,nuvei,payme,wellsfargo,bamboraapac,elavon,fiuu,nexixpay,novalnet,paybox,paypal,xendit,moneris,archipel,worldpayvantiv,mollie.airwallex,peachpayments,imerchantsolutions"
 card.debit.connector_list = "aci,checkout,stripe,adyen,authorizedotnet,cybersource,datatrans,globalpay,worldpay,multisafepay,nmi,nexinets,noon,bankofamerica,braintree,nuvei,payme,wellsfargo,bamboraapac,elavon,fiuu,nexixpay,novalnet,paybox,paypal,xendit,moneris,archipel,worldpayvantiv,mollie,airwallex,peachpayments,imerchantsolutions"
-wallet.paypal = { connector_list = "adyen,novalnet" }                                          # Mandate supported payment method type and connector for wallets
-pay_later.klarna = { connector_list = "adyen" }                                       # Mandate supported payment method type and connector for pay_later
-bank_debit.ach = { connector_list = "gocardless,adyen" }                              # Mandate supported payment method type and connector for bank_debit
-bank_debit.becs = { connector_list = "gocardless" }                                   # Mandate supported payment method type and connector for bank_debit
-bank_debit.bacs = { connector_list = "adyen" }                                        # Mandate supported payment method type and connector for bank_debit
-bank_debit.sepa = { connector_list = "gocardless,adyen" }                             # Mandate supported payment method type and connector for bank_debit
+wallet.paypal = { connector_list = "adyen,novalnet" }
+pay_later.klarna = { connector_list = "adyen" }
+bank_debit.ach = { connector_list = "gocardless,adyen" }
+bank_debit.becs = { connector_list = "gocardless" }
+bank_debit.bacs = { connector_list = "adyen" }
+bank_debit.sepa = { connector_list = "gocardless,adyen" }
 bank_redirect.ideal = { connector_list = "stripe,adyen,globalpay" }                   # Mandate supported payment method type and connector for bank_redirect
 bank_redirect.sofort = { connector_list = "globalpay" }
 wallet.apple_pay = { connector_list = "stripe,adyen,braintree,cybersource,noon,bankofamerica,authorizedotnet,novalnet,worldpayxml,imerchantsolutions" }
@@ -1160,7 +1160,7 @@ apple_pay_merchant_cert = "APPLE_PAY_MERCHANT_CERTIFICATE"         # Merchant Ce
 apple_pay_merchant_cert_key = "APPLE_PAY_MERCHANT_CERTIFICATE_KEY" # Private key generated by RSA:2048 algorithm. Refer Hyperswitch Docs (https://docs.hyperswitch.io/hyperswitch-cloud/payment-methods-setup/wallets/apple-pay/ios-application/) to generate the private key
 
 [paze_decrypt_keys]
-paze_private_key = "PAZE_PRIVATE_KEY"                       # Base 64 Encoded Private Key File cakey.pem generated for Paze  -> Command to create private key: openssl req -newkey rsa:2048 -x509 -keyout cakey.pem -out cacert.pem -days 365
+paze_private_key = "PAZE_PRIVATE_KEY"
 paze_private_key_passphrase = "PAZE_PRIVATE_KEY_PASSPHRASE" # PEM Passphrase used for generating Private Key File cakey.pem
 
 [google_pay_decrypt_keys]
@@ -1178,9 +1178,9 @@ google_pay_root_signing_keys = "GOOGLE_PAY_ROOT_SIGNING_KEYS" # Base 64 Encoded 
 #               grep -oE '\.@[A-F0-9]+' | sed 's/^\.@//'
 # )
 # echo "Merchant ID: $MERCHANT_ID"
-common_merchant_identifier = "APPLE_PAY_COMMON_MERCHANT_IDENTIFIER"                        # This can be obtained by decrypting the apple_pay_ppc_key as shown above in comments
-merchant_cert = "APPLE_PAY_MERCHANT_CERTIFICATE"                                           # Merchant Certificate provided by Apple Pay (https://developer.apple.com/) Certificates, Identifiers & Profiles > Apple Pay Merchant Identity Certificate
-merchant_cert_key = "APPLE_PAY_MERCHANT_CERTIFICATE_KEY"                                   # Private key generate by RSA:2048 algorithm. Refer Hyperswitch Docs (https://docs.hyperswitch.io/hyperswitch-cloud/payment-methods-setup/wallets/apple-pay/ios-application/) to generate the private key
+common_merchant_identifier = "APPLE_PAY_COMMON_MERCHANT_IDENTIFIER"
+merchant_cert = "APPLE_PAY_MERCHANT_CERTIFICATE"
+merchant_cert_key = "APPLE_PAY_MERCHANT_CERTIFICATE_KEY"
 applepay_endpoint = "https://apple-pay-gateway.apple.com/paymentservices/registerMerchant" # Apple pay gateway merchant endpoint
 
 [generic_link]
@@ -1269,14 +1269,14 @@ enabled = true
 client_id = "paypal_client_id"      # Client ID for PayPal onboarding
 client_secret = "paypal_secret_key" # Secret key for PayPal onboarding
 partner_id = "paypal_partner_id"    # Partner ID for PayPal onboarding
-enabled = true                      # Switch to enable or disable PayPal onboarding
+enabled = true
 
 [events]
 source = "logs" # The event sink to push events supports kafka or logs (stdout)
 emit_external_service_call_events = false # Enable external service call event emission
 
 [events.kafka]
-brokers = []                             # Kafka broker urls for bootstrapping the client
+brokers = []
 fraud_check_analytics_topic = "topic"    # Kafka topic to be used for FraudCheck events
 intent_analytics_topic = "topic"         # Kafka topic to be used for PaymentIntent events
 attempt_analytics_topic = "topic"        # Kafka topic to be used for PaymentAttempt events
@@ -1352,9 +1352,9 @@ global_tenant = { tenant_id = "global", schema = "public", redis_key_prefix = ""
 
 [multitenancy.tenants.public]
 base_url = "http://localhost:8080"               # URL of the tenant
-schema = "public"                                # Postgres db schema
+schema = "public"
 accounts_schema = "public"
-redis_key_prefix = ""                            # Redis key distinguisher
+redis_key_prefix = ""
 clickhouse_database = "default"                  # Clickhouse database
 
 [multitenancy.tenants.public.user]
@@ -1382,7 +1382,7 @@ fetch_token_url= ""           # base url to fetch token
 token_service_api_key= ""      # api key for token service
 public_key= ""                # public key to encrypt data for token service
 private_key= ""               # private key to decrypt  response payload from token service
-key_id= ""                    # key id to encrypt data for token service
+key_id= ""
 delete_token_url= ""          # base url to delete token from token service
 check_token_status_url= ""    # base url to check token status from token service
 webhook_source_verification_key= "" # webhook source verification key to verify the webhook payload from token service
@@ -1410,24 +1410,24 @@ service = "dynamo" # Service name
 file_storage_backend = "file_system" # Theme storage backend to be used
 
 [theme.email_config]
-entity_name = "Hyperswitch"                                                      # Display name in emails
+entity_name = "Hyperswitch"
 entity_logo_url = "https://app.hyperswitch.io/email-assets/HyperswitchLogo.png"  # Logo URL for emails
-foreground_color = "#111326"                                                     # Text color
-primary_color = "#006DF9"                                                        # Primary color
-background_color = "#FFFFFF"                                                     # Email background color
+foreground_color = "#111326"
+primary_color = "#006DF9"
+background_color = "#FFFFFF"
 
 [billing_connectors_payment_sync]
 billing_connectors_which_require_payment_sync = "stripebilling, recurly" # List of billing connectors which has payment sync api call
 
 [open_router]
-dynamic_routing_enabled = true                          # Enable or disable Open Router for dynamic routing
+dynamic_routing_enabled = true
 static_routing_enabled = true           # Enable or disable Open Router for static routing
 url = "http://localhost:8080"           # Open Router URL
 
 [grpc_client.unified_connector_service]
 base_url = "http://localhost:8000"      # Unified Connector Service Base URL
 connection_timeout = 10                 # Connection Timeout Duration in Seconds
-request_timeout = 35                    # Per-RPC Request Timeout in Seconds
+request_timeout = 35
 ucs_only_connectors = "imerchantsolutions, paytm, phonepe, hyperpg, revolv3, fiservcommercehub, absa_sanlam, interpayments, dlocal, barclaycard, tsys_transit, jpmorgan, datatrans"    # Comma-separated list of connectors that use UCS only
 ucs_psync_disabled_connectors = "cashtocode, trustly"    # Comma-separated list of connectors to disable UCS PSync call
 
@@ -1481,9 +1481,9 @@ enabled = true # Enable or disable platform features
 allow_connected_merchants = false # Enable or disable connected merchant account features
 
 [chat]
-enabled = false                                # Enable or disable chat features
+enabled = false
 hyperswitch_ai_host = "http://0.0.0.0:8000"    # Hyperswitch ai workflow host
-encryption_key = ""                            # Key to encrypt and decrypt chats
+encryption_key = ""
 
 [trace_header]
 header_name = "x-request-id"    # HTTP header name for request tracing (can be x-trace-id, x-correlation-id, etc.)
@@ -1505,10 +1505,10 @@ payments_base_url = "http://localhost:8080"
 [superposition]
 endpoint = "http://superposition:8080"          # Superposition service endpoint URL
 token = "your_superposition_token"              # Superposition token
-org_id = "your_org_id"                          # Organization ID in Superposition
+org_id = "your_org_id"
 workspace_id = "your_workspace_id"              # Workspace ID in Superposition
-polling_interval = 15                           # Polling interval in seconds for configuration updates
-request_timeout =  60                           # Request timeout in seconds for Superposition API calls (optional, default: none)
+polling_interval = 15
+request_timeout =  60
 backup_file_path = "./config/superposition_seed.toml" # Path to a local file for fallback configuration. Used when the Superposition HTTP service is unavailable. If set, the client will fall back to reading configuration from this file instead of failing completely. This ensures graceful degradation during network outages or service disruptions.
 
 [micro_services]
